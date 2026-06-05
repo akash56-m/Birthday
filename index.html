@@ -712,25 +712,40 @@
     background: radial-gradient(ellipse at 50% 40%, #ffe4f0 0%, #fff0f8 40%, #fdf6ec 100%);
   }
   .bouquet-container {
-    display: flex; align-items: flex-end; justify-content: center;
-    gap: clamp(20px,6vw,44px); margin: 14px 0 20px;
-    height: 300px; position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 320px;
+    margin: 14px 0 20px;
+    position: relative;
   }
 
   /* Each flower wrapper */
   .flower {
-    display: flex; flex-direction: column; align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-end;
     height: 270px;
-    cursor: pointer; -webkit-tap-highlight-color: transparent;
-    position: relative; transform-origin: bottom center;
+    width: 80px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
     filter: drop-shadow(0 6px 14px rgba(200,100,140,0.18));
-    transition: filter 0.3s ease;
-    z-index: 15; /* Stand in front of wrapper when unpicked */
+    transition: filter 0.3s ease, z-index 0s linear;
   }
-  .flower:nth-child(1) { animation: sway1 3.8s ease-in-out infinite; }
-  .flower:nth-child(2) { animation: sway2 4.4s ease-in-out infinite; }
-  .flower:nth-child(3) { animation: sway1 3.2s ease-in-out infinite 0.6s; }
+  
+  /* Initial positions */
+  #flower-1 { left: 10%; z-index: 16; }
+  #flower-2 { left: 50%; transform: translateX(-50%); z-index: 16; }
+  #flower-3 { left: 70%; z-index: 16; }
+
+  /* Sways while unpicked */
+  #flower-1:not(.picked):not(.picking) { animation: sway1 3.8s ease-in-out infinite; }
+  #flower-2:not(.picked):not(.picking) { animation: sway2 4.4s ease-in-out infinite; }
+  #flower-3:not(.picked):not(.picking) { animation: sway1 3.2s ease-in-out infinite 0.6s; }
+
   @keyframes sway1 { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
   @keyframes sway2 { 0%,100%{transform:rotate(5deg)} 50%{transform:rotate(-5deg)} }
 
@@ -747,67 +762,76 @@
     100% { transform: scale(1.12); }
   }
 
-  /* Picked / picking states - float into wrap */
+  /* Plucking animations / Picked states */
+  .flower.picking {
+    z-index: 8 !important;
+  }
   .flower.picked {
-    position: relative;
-    z-index: 5;
+    z-index: 8 !important;
     pointer-events: none;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
     animation: none !important;
   }
-  #flower-1.picked {
-    transform: translate(clamp(40px, 11vw, 65px), 48px) scale(0.76) rotate(-12deg) !important;
-  }
-  #flower-2.picked {
-    transform: translate(0, 56px) scale(0.76) rotate(0deg) !important;
-  }
-  #flower-3.picked {
-    transform: translate(calc(clamp(40px, 11vw, 65px) * -1), 48px) scale(0.76) rotate(12deg) !important;
-  }
-  
-  /* Plucking animations */
+
   #flower-1.picking {
     animation: pluckToWrapper1 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    z-index: 5; /* Tuck behind wrapper during picking */
   }
   #flower-2.picking {
     animation: pluckToWrapper2 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    z-index: 5; /* Tuck behind wrapper during picking */
   }
   #flower-3.picking {
     animation: pluckToWrapper3 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    z-index: 5; /* Tuck behind wrapper during picking */
   }
-  
+
+  #flower-1.picked {
+    left: 38%;
+    bottom: 22px;
+    transform: translateX(-50%) scale(0.78) rotate(-15deg) !important;
+  }
+  #flower-2.picked {
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) scale(0.78) rotate(0deg) !important;
+  }
+  #flower-3.picked {
+    left: 62%;
+    bottom: 22px;
+    transform: translateX(-50%) scale(0.78) rotate(15deg) !important;
+  }
+
   @keyframes pluckToWrapper1 {
-    0% { transform: translateY(0) rotate(-4deg) scale(1); }
-    35% { transform: translateY(-35px) rotate(-18deg) scale(1.15); }
-    100% { transform: translate(clamp(40px, 11vw, 65px), 48px) scale(0.76) rotate(-12deg); }
+    0% { left: 10%; bottom: 0; transform: rotate(-4deg) scale(1); }
+    35% { left: 20%; bottom: 60px; transform: rotate(-22deg) scale(1.15); }
+    100% { left: 38%; bottom: 22px; transform: translateX(-50%) scale(0.78) rotate(-15deg); }
   }
   @keyframes pluckToWrapper2 {
-    0% { transform: translateY(0) rotate(5deg) scale(1); }
-    35% { transform: translateY(-40px) rotate(0deg) scale(1.15); }
-    100% { transform: translate(0, 56px) scale(0.76) rotate(0deg); }
+    0% { left: 50%; bottom: 0; transform: translateX(-50%) rotate(5deg) scale(1); }
+    35% { left: 50%; bottom: 70px; transform: translateX(-50%) rotate(0deg) scale(1.15); }
+    100% { left: 50%; bottom: 30px; transform: translateX(-50%) scale(0.78) rotate(0deg); }
   }
   @keyframes pluckToWrapper3 {
-    0% { transform: translateY(0) rotate(3deg) scale(1); }
-    35% { transform: translateY(-35px) rotate(18deg) scale(1.15); }
-    100% { transform: translate(calc(clamp(40px, 11vw, 65px) * -1), 48px) scale(0.76) rotate(12deg); }
+    0% { left: 70%; bottom: 0; transform: rotate(3deg) scale(1); }
+    35% { left: 66%; bottom: 60px; transform: rotate(22deg) scale(1.15); }
+    100% { left: 62%; bottom: 22px; transform: translateX(-50%) scale(0.78) rotate(15deg); }
   }
 
   /* Bouquet Wrapping Paper */
-  .bouquet-wrap {
+  .bouquet-wrap-back, .bouquet-wrap-front {
     position: absolute;
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
     width: 210px;
     height: 155px;
-    z-index: 12;
     pointer-events: none;
     filter: drop-shadow(0 6px 15px rgba(0,0,0,0.12));
-    opacity: 0.95;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .bouquet-wrap-back {
+    z-index: 4;
+  }
+  .bouquet-wrap-front {
+    z-index: 12;
   }
 
   /* SVG flower canvas */
@@ -2098,11 +2122,15 @@
         <div class="flower-stem"></div>
       </div>
 
-      <!-- Kraft Bouquet wrapper -->
-      <div class="bouquet-wrap">
+      <!-- Kraft Bouquet wrapper (split into back & front layers for 3D depth) -->
+      <div class="bouquet-wrap-back">
         <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
           <!-- Kraft paper center back -->
           <path d="M20 20 C70 60, 130 60, 180 20 C140 100, 120 130, 100 150 C80 130, 60 100, 20 20Z" fill="#E3C9A8" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="bouquet-wrap-front">
+        <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
           <!-- Kraft paper fold left -->
           <path d="M20 20 C60 120, 80 140, 100 150 C70 110, 40 60, 20 20Z" fill="#D2B48C" stroke="#C5A070" stroke-width="1.5"/>
           <!-- Kraft paper fold right -->
@@ -2225,8 +2253,7 @@
       
       <h2 class="share-title anim-up anim-d2">Happy Birthday, Dipti!</h2>
       <p class="share-sub anim-up anim-d3">
-        "The world is brighter because you're in it." 💕<br/>
-        — Pradyum
+        "The world is brighter because you're in it." 💕
       </p>
       <div class="share-btns anim-up anim-d4">
         <button class="sbtn primary" onclick="sharePage()">📤 Share This Page</button>
@@ -2949,13 +2976,13 @@ function pickFlower(num) {
     pickedCount++;
     if (pickedCount === 3) {
       setTimeout(() => {
-        const wrap = document.querySelector('.bouquet-wrap');
-        if (wrap) {
+        const wraps = document.querySelectorAll('.bouquet-wrap-back, .bouquet-wrap-front');
+        wraps.forEach(wrap => {
           wrap.style.transform = 'translateX(-50%) scale(1.15)';
           setTimeout(() => {
             wrap.style.transform = 'translateX(-50%) scale(1)';
           }, 350);
-        }
+        });
         
         triggerBirthdayConfetti();
         
