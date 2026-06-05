@@ -1100,6 +1100,83 @@
     box-shadow: 0 8px 26px rgba(201,123,132,0.48);
   }
 
+  /* Cake transition button (after letter) */
+  .cake-transition-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 18px auto 0;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light, #f0d080));
+    color: #fff;
+    font-family: var(--fu);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(201,168,76,0.4);
+    transition: transform 0.22s, box-shadow 0.22s;
+    animation: cakeBtnPulse 2.5s ease-in-out infinite;
+    letter-spacing: 0.03em;
+  }
+  .cake-transition-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 10px 30px rgba(201,168,76,0.55);
+  }
+  @keyframes cakeBtnPulse {
+    0%,100% { box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+    50%     { box-shadow: 0 8px 32px rgba(201,168,76,0.65); }
+  }
+
+  /* Blow countdown overlay */
+  .blow-countdown {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,251,244,0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .blow-countdown.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .countdown-number {
+    font-family: var(--fd);
+    font-size: clamp(4rem, 18vw, 7rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--cake-rose, #e8698a), var(--cake-rose-deep, #c9537a), var(--cake-gold, #c9a84c));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: countPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    user-select: none;
+  }
+  @keyframes countPop {
+    0%   { transform: scale(0.3); opacity: 0; }
+    50%  { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .countdown-number.blow-text {
+    font-family: var(--fc);
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    animation: blowPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes blowPop {
+    0%   { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    60%  { transform: scale(1.2) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
   /* ════════════════════════════════════════════════════════
      SECTION 7 — SHARE + REPLAY
   ════════════════════════════════════════════════════════ */
@@ -1124,6 +1201,7 @@
     background: radial-gradient(ellipse at 50% 50%, #fffbf4 0%, #fff2e0 70%);
   }
   .cake-hero {
+    position: relative;
     width: min(100%, 960px);
     margin: 0 auto;
     display: flex;
@@ -2202,6 +2280,9 @@
       </div>
       
       <p class="final-message">July 17, 2026 · Made with love 💕</p>
+      <button class="cake-transition-btn" onclick="scrollToSection(6)">
+        🎂 Make a Wish
+      </button>
     </div>
   </section>
 
@@ -2238,11 +2319,16 @@
         </span>
       </button>
 
+      <!-- Blow countdown overlay -->
+      <div class="blow-countdown" id="blowCountdown">
+        <span class="countdown-number" id="countdownNum"></span>
+      </div>
+
       <div class="wish-panel anim-up anim-d3">
         <p class="wish-status" id="wishStatus" aria-live="polite">Close your eyes. Make one birthday wish.</p>
         <div class="action-row">
-          <button class="action-btn primary" type="button" id="blowBtn">Blow candles</button>
-          <button class="action-btn" type="button" id="relightBtn" hidden>Relight</button>
+          <button class="action-btn primary" type="button" id="blowBtn">Blow candles 🕯️</button>
+          <button class="action-btn" type="button" id="relightBtn" hidden>Relight 🕯️</button>
         </div>
         <p class="feedback" id="cakeFeedback" aria-live="polite"></p>
       </div>
@@ -3170,22 +3256,66 @@ function replayPage() {
 }
 
 let cakeBlown = false;
+let countdownRunning = false;
+
 function blowCakeCandles() {
-  if (cakeBlown) return;
+  if (cakeBlown || countdownRunning) return;
+  countdownRunning = true;
+
+  const overlay = document.getElementById('blowCountdown');
+  const numEl = document.getElementById('countdownNum');
+  const wishStatus = document.getElementById('wishStatus');
+  const blowBtn = document.getElementById('blowBtn');
+
+  blowBtn.disabled = true;
+  blowBtn.textContent = 'Blowing...';
+  wishStatus.textContent = 'Close your eyes...';
+  haptic([8]);
+
+  // Show countdown overlay
+  overlay.classList.add('active');
+
+  // 3... 2... 1... Blow!
+  const steps = ['3', '2', '1', '🌬️ Blow!'];
+  let step = 0;
+
+  function showNext() {
+    if (step >= steps.length) {
+      // Done — actually blow the candles
+      overlay.classList.remove('active');
+      countdownRunning = false;
+      executeBlowCandles();
+      return;
+    }
+    numEl.className = 'countdown-number' + (step === 3 ? ' blow-text' : '');
+    numEl.textContent = steps[step];
+    // Force re-trigger animation
+    numEl.style.animation = 'none';
+    numEl.offsetHeight; // reflow
+    numEl.style.animation = '';
+    haptic([12]);
+    if (step < 3) SFX.playPop();
+    step++;
+    setTimeout(showNext, step <= 3 ? 1000 : 800);
+  }
+  showNext();
+}
+
+function executeBlowCandles() {
   cakeBlown = true;
-  
+
   const cakeBtn = document.getElementById('cakeButton');
   const wishStatus = document.getElementById('wishStatus');
   const blowBtn = document.getElementById('blowBtn');
   const relightBtn = document.getElementById('relightBtn');
-  
+
   cakeBtn.classList.add('wish-made');
   cakeBtn.setAttribute('aria-label', 'Dipti birthday candles are blown out');
-  wishStatus.textContent = 'Wish made. Happy Birthday, Dipti. 🎂';
-  blowBtn.textContent = 'Wish made';
+  wishStatus.textContent = '✨ Wish made. Happy Birthday, Dipti! 🎂';
+  blowBtn.textContent = '✨ Wish made';
   blowBtn.disabled = true;
   relightBtn.hidden = false;
-  
+
   haptic([18, 40, 18]);
   SFX.playChime();
   triggerBirthdayConfetti();
@@ -3194,6 +3324,7 @@ function blowCakeCandles() {
 
 function relightCakeCandles() {
   cakeBlown = false;
+  countdownRunning = false;
   const cakeBtn = document.getElementById('cakeButton');
   const wishStatus = document.getElementById('wishStatus');
   const blowBtn = document.getElementById('blowBtn');
@@ -3202,7 +3333,7 @@ function relightCakeCandles() {
   cakeBtn.classList.remove('wish-made');
   cakeBtn.setAttribute('aria-label', "Blow out Dipti's birthday candles");
   wishStatus.textContent = 'Close your eyes. Make one birthday wish.';
-  blowBtn.textContent = 'Blow candles';
+  blowBtn.textContent = 'Blow candles 🕯️';
   blowBtn.disabled = false;
   relightBtn.hidden = true;
   haptic([10]);
