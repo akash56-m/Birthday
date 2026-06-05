@@ -32,6 +32,13 @@
     --fb: 'Lora', serif;
     --fd: 'Playfair Display', serif;
     --fu: 'Poppins', sans-serif;
+
+    /* Cake Page Specific Tokens */
+    --cake-rose:      #ce6f7b;
+    --cake-rose-deep: #9d4d58;
+    --cake-sage:      #557d71;
+    --cake-gold:      #d8ad48;
+    --cake-gold-light:#f4d577;
   }
 
   /* ════════════════════════════════════════════════════════
@@ -1037,7 +1044,6 @@
     font-family: var(--fc); font-size: 1.9rem; color: var(--mauve);
     transform: rotate(-2deg); display: block;
   }
-  .closing-seal { text-align: center; margin-top: 22px; font-size: 2.8rem; animation: sealPulse 2s ease-in-out infinite; }
   .final-message {
     text-align: center; margin-top: 16px;
     font-family: var(--fc); font-size: 1.2rem; color: var(--ink-soft);
@@ -1062,73 +1068,7 @@
   }
 
   /* ════════════════════════════════════════════════════════
-     LETTER P.S. CONTAINER (Wax Seal & Note)
-     ════════════════════════════════════════════════════════ */
-  .letter-ps-container {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  .ps-seal-wrapper {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    transition: transform 0.3s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .ps-seal-wrapper:hover {
-    transform: scale(1.08);
-  }
-  .ps-wax-seal {
-    width: 60px;
-    height: 60px;
-    filter: drop-shadow(0 4px 8px rgba(139,26,26,0.4));
-    transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .ps-hint {
-    font-family: var(--fc);
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    animation: hintBlink 2s infinite;
-  }
-  .ps-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-    width: 100%;
-    text-align: center;
-  }
-  .ps-content.active {
-    max-height: 120px;
-    opacity: 1;
-    margin-top: 14px;
-  }
-  .ps-text {
-    font-family: var(--fb);
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--mauve-dark);
-    line-height: 1.6;
-    padding: 12px 18px;
-    background: rgba(232,160,160,0.08);
-    border-radius: 8px;
-    border-left: 3px solid var(--mauve);
-  }
-  .ps-seal-wrapper.broken .ps-wax-seal {
-    transform: scale(0) rotate(25deg);
-    opacity: 0;
-  }
-  .ps-seal-wrapper.broken .ps-hint {
-    display: none;
-  }
-
-  /* ════════════════════════════════════════════════════════
-     SECTION 6 — SHARE + REPLAY
+     SECTION 7 — SHARE + REPLAY
   ════════════════════════════════════════════════════════ */
   #section-share {
     background: radial-gradient(ellipse at 50% 40%, #fde0e0 0%, #fdf6ec 70%);
@@ -1143,274 +1083,485 @@
     width: 100%;
     margin: auto 0;
   }
-  .cake-invite {
-    margin: 0 auto 20px;
-    width: min(100%, 340px);
-  }
-  .cake-wish-link {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 14px;
-    min-height: 82px;
-    padding: 14px 16px;
-    color: var(--ink);
-    text-decoration: none;
-    background:
-      linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,246,236,0.84)),
-      repeating-linear-gradient(135deg, rgba(232,160,160,0.14) 0 8px, transparent 8px 18px);
-    border: 1px solid rgba(201,123,132,0.22);
-    border-radius: 18px;
-    box-shadow: 0 12px 34px rgba(168,90,101,0.14);
-    overflow: hidden;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-  }
-  .cake-wish-link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.72), transparent);
-    transform: translateX(-115%);
-    animation: cakeInviteShine 4.8s ease-in-out infinite;
-    pointer-events: none;
-  }
-  .cake-wish-link:hover,
-  .cake-wish-link:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 40px rgba(168,90,101,0.2);
-  }
-  .cake-preview {
-    position: relative;
-    width: 56px;
-    height: 48px;
-    filter: drop-shadow(0 10px 12px rgba(168,90,101,0.14));
-  }
-  .cake-preview::before,
-  .cake-preview::after {
-    content: "";
-    position: absolute;
-    left: 8px;
-    border-radius: 9px 9px 4px 4px;
-  }
-  .cake-preview::before {
-    bottom: 6px;
-    width: 40px;
-    height: 20px;
-    background: linear-gradient(180deg, #fff4d6 0 38%, var(--blush) 39% 100%);
-    box-shadow: 0 8px 0 var(--mauve);
-  }
-  .cake-preview::after {
-    bottom: 34px;
-    left: 14px;
-    width: 28px;
-    height: 8px;
-    background: white;
-  }
-  .preview-candle {
-    position: absolute;
-    bottom: 40px;
-    left: 25px;
-    width: 5px;
-    height: 17px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  }
-  .preview-candle::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    width: 8px;
-    height: 10px;
-    border-radius: 50% 50% 42% 42%;
-    background: #ffa84d;
-    box-shadow: 0 0 14px rgba(255,168,77,0.8);
-    transform: translateX(-50%);
-    animation: previewFlame 0.7s ease-in-out infinite alternate;
-  }
-  .cake-link-copy,
-  .cake-link-sub {
-    display: block;
-    text-align: left;
-  }
-  .cake-link-copy {
-    font-family: var(--fu);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--mauve-dark);
-  }
-  .cake-link-sub {
-    margin-top: 3px;
-    font-family: var(--fb);
-    font-style: italic;
-    font-size: 0.82rem;
-    line-height: 1.42;
-    color: var(--ink-soft);
-  }
-  .cake-link-arrow {
-    font-family: var(--fu);
-    font-size: 1.3rem;
-    color: var(--gold);
-    transform: translateX(0);
-    transition: transform 0.22s ease;
-  }
-  .cake-wish-link:hover .cake-link-arrow,
-  .cake-wish-link:focus-visible .cake-link-arrow {
-    transform: translateX(3px);
-  }
-  @keyframes cakeInviteShine {
-    0%, 52%, 100% { transform: translateX(-115%); }
-    68% { transform: translateX(115%); }
-  }
-  @keyframes previewFlame {
-    from { transform: translateX(-50%) rotate(-4deg) scale(0.92); }
-    to { transform: translateX(-50%) rotate(4deg) scale(1.06); }
-  }
 
-  /* Animated CSS Birthday Cake */
-  .share-cake-container {
-    margin-bottom: 22px;
+  /* ════════════════════════════════════════════════════════
+     SECTION 6 — PREMIUM CAKE
+  ════════════════════════════════════════════════════════ */
+  #section-cake {
+    background: radial-gradient(ellipse at 50% 50%, #fffbf4 0%, #fff2e0 70%);
+  }
+  .cake-hero {
+    width: min(100%, 960px);
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    width: 100%;
+    gap: clamp(16px, 4vh, 28px);
+    text-align: center;
   }
-  .cake {
+  .hero-copy {
+    width: min(100%, 620px);
+    animation: riseIn 0.72s ease both;
+  }
+  .eyebrow {
+    margin: 0 0 6px;
+    font-family: var(--fu);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--cake-sage);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .cake-button {
     position: relative;
-    width: 120px;
-    height: 90px;
+    width: min(80vw, 250px);
+    aspect-ratio: 1 / 1.03;
+    border: 0;
+    background: transparent;
     cursor: pointer;
-    margin: 10px auto;
+    padding: 0;
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    filter: drop-shadow(0 20px 24px rgba(99,49,44,0.15));
+    animation: cakeArrive 0.85s cubic-bezier(.2,.85,.22,1.18) both;
   }
-  .plate {
-    position: absolute; bottom: 0; left: -10px; width: 140px; height: 6px;
-    background: #E8C97A; border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  .cake-button::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: 4%;
+    height: 8%;
+    border-radius: 50%;
+    background: rgba(82,48,42,0.12);
+    filter: blur(8px);
+    transform: scaleX(1.08);
   }
-  .layer {
-    position: absolute; left: 10px; width: 100px;
-    border-radius: 8px 8px 0 0;
-    border: 1px solid rgba(232,160,160,0.18);
+  .cake-build {
+    position: absolute;
+    inset: 0;
+    animation: gentleFloat 3.8s ease-in-out infinite;
+    transform-origin: 50% 75%;
   }
-  .layer-bottom { bottom: 6px; height: 32px; background: #C97B84; }
-  .layer-middle { bottom: 32px; height: 26px; background: #E8A0A0; width: 90px; left: 15px; }
-  .layer-top { bottom: 54px; height: 22px; background: var(--cream-deep); width: 80px; left: 20px; }
-  .frosting {
-    position: absolute; bottom: 70px; left: 17px; width: 86px; height: 8px;
-    background: white; border-radius: 4px;
+  .tier {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px 16px 10px 10px;
+    border: 1px solid rgba(157,77,88,0.15);
+    overflow: hidden;
   }
-  .candles-container {
-    position: absolute; bottom: 74px; left: 20px; width: 80px;
-    display: flex; justify-content: space-around;
+  .tier::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 0 12%, rgba(255,255,255,0.32) 12% 20%, transparent 20% 100%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.14) 0 12px, transparent 12px 27px);
+    opacity: 0.58;
+  }
+  .tier-bottom {
+    width: 78%;
+    height: 18%;
+    bottom: 16%;
+    background: linear-gradient(180deg, #db7f8a, var(--cake-rose));
+  }
+  .tier-middle {
+    width: 65%;
+    height: 17%;
+    bottom: 31%;
+    background: linear-gradient(180deg, #ffd7d0, #ed9ca3);
+  }
+  .tier-top {
+    width: 50%;
+    height: 15%;
+    bottom: 46%;
+    background: linear-gradient(180deg, #fff2cf, #f6caa6);
+  }
+  .icing {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 5.2%;
+    border-radius: 999px;
+    background: #fffdfa;
+    box-shadow: 0 5px 0 rgba(255,255,255,0.58);
+  }
+  .icing.bottom { width: 82%; bottom: 32%; }
+  .icing.middle { width: 69%; bottom: 47%; }
+  .icing.top { width: 54%; bottom: 60%; }
+  .drip {
+    position: absolute;
+    top: 80%;
+    width: 7%;
+    background: #fffdfa;
+    border-radius: 0 0 999px 999px;
+  }
+  .drip.one { left: 18%; height: 180%; }
+  .drip.two { left: 44%; height: 130%; }
+  .drip.three { right: 16%; height: 165%; }
+  .sprinkle {
+    position: absolute;
+    width: 7px;
+    height: 3px;
+    border-radius: 999px;
+    transform: rotate(var(--rot));
+    opacity: 0.86;
+  }
+  .s1 { left: 27%; bottom: 39%; --rot: 22deg; background: var(--cake-gold); }
+  .s2 { left: 61%; bottom: 41%; --rot: -16deg; background: var(--cake-sage); }
+  .s3 { left: 38%; bottom: 54%; --rot: 14deg; background: var(--cake-rose-deep); }
+  .s4 { left: 55%; bottom: 56%; --rot: -28deg; background: var(--cake-gold); }
+  .s5 { left: 47%; bottom: 67%; --rot: 21deg; background: var(--cake-sage); }
+  .candles {
+    position: absolute;
+    left: 50%;
+    bottom: 61%;
+    width: 46%;
+    height: 24%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    pointer-events: none;
   }
   .candle {
-    width: 6px; height: 22px; background: linear-gradient(to right, var(--gold), var(--gold-light));
-    position: relative; border-radius: 2px 2px 0 0;
+    position: relative;
+    width: 10%;
+    min-width: 12px;
+    height: 58%;
+    border-radius: 5px 5px 2px 2px;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.85) 0 7px, transparent 7px 13px),
+      linear-gradient(90deg, var(--cake-gold), var(--cake-gold-light));
+    box-shadow: inset -3px 0 rgba(149,100,25,0.16);
   }
   .flame {
-    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-    width: 8px; height: 11px; background: #FFA500;
-    border-radius: 50% 50% 20% 20%;
-    box-shadow: 0 0 10px rgba(255,165,0,0.8);
-    animation: flameWiggle 0.6s ease-in-out infinite alternate;
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    width: 17px;
+    height: 24px;
+    border-radius: 55% 55% 45% 45%;
+    background:
+      radial-gradient(circle at 50% 68%, #fff9ad 0 22%, transparent 24%),
+      linear-gradient(180deg, #ffd16b, #ff8f3a 72%, #f05e3a);
+    transform: translateX(-50%);
+    transform-origin: 50% 88%;
+    box-shadow: 0 0 18px rgba(255,143,58,0.86), 0 0 38px rgba(255,209,107,0.42);
+    animation: flameDance 0.62s ease-in-out infinite alternate;
     transform-origin: bottom center;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.42s ease, transform 0.42s ease;
   }
-  @keyframes flameWiggle {
-    0% { transform: translateX(-50%) rotate(-3deg) scale(0.95); }
-    100% { transform: translateX(-50%) rotate(3deg) scale(1.05); }
-  }
-  .flame.extinguished {
+  .smoke {
+    position: absolute;
+    left: 50%;
+    top: -18px;
+    width: 10px;
+    height: 28px;
+    border: 2px solid rgba(87,111,103,0.34);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
     opacity: 0;
-    transform: translateX(-50%) scale(0) translateY(-5px);
+    transform: translateX(-50%) translateY(0) scale(0.78);
   }
-  .cake-hint {
+  .candle:nth-child(2) .smoke { animation-delay: 0.16s; }
+  .candle:nth-child(3) .smoke { animation-delay: 0.28s; }
+  .wish-made .flame {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px) scale(0.2);
+  }
+  .wish-made .smoke {
+    animation: smokeRise 2.4s ease-out 2;
+  }
+  .wish-made .cake-build {
+    animation: celebrationBounce 0.8s cubic-bezier(.2,.9,.2,1.18) both;
+  }
+  .wish-panel {
+    width: min(100%, 620px);
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+  }
+  .wish-status {
+    min-height: 42px;
+    margin: 0;
+    color: var(--cake-rose-deep);
     font-family: var(--fc);
-    font-size: 1.05rem;
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+  .action-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .action-btn {
+    border: 0;
+    border-radius: 999px;
+    min-height: 40px;
+    padding: 10px 22px;
+    cursor: pointer;
+    font-family: var(--fu);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--cake-rose-deep);
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(206,111,123,0.18);
+    box-shadow: 0 6px 18px rgba(82,48,42,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(82,48,42,0.12);
+  }
+  .action-btn.primary {
+    color: white;
+    background: linear-gradient(135deg, var(--cake-rose), var(--cake-rose-deep));
+    border-color: transparent;
+    box-shadow: 0 10px 24px rgba(157,77,88,0.2);
+  }
+  .action-btn:disabled {
+    cursor: default;
+    opacity: 0.72;
+    transform: none;
+    box-shadow: 0 6px 18px rgba(82,48,42,0.06);
+  }
+  .feedback {
+    min-height: 22px;
+    margin: 0;
+    color: var(--sage-dark);
+    font-family: var(--fu);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .burst-piece {
+    position: fixed;
+    z-index: 20;
+    left: var(--x);
+    top: var(--y);
+    font-size: var(--size);
+    pointer-events: none;
+    animation: burst 1.2s ease-out forwards;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cakeArrive {
+    from { opacity: 0; transform: translateY(24px) scale(0.92); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+    50% { transform: translateY(-9px) rotate(0.5deg); }
+  }
+  @keyframes celebrationBounce {
+    0% { transform: translateY(0) scale(1); }
+    38% { transform: translateY(-16px) scale(1.035); }
+    70% { transform: translateY(4px) scale(0.99); }
+    100% { transform: translateY(0) scale(1); }
+  }
+  @keyframes flameDance {
+    from { transform: translateX(-50%) rotate(-4deg) scale(0.94); }
+    to { transform: translateX(-50%) rotate(5deg) scale(1.08); }
+  }
+  @keyframes smokeRise {
+    0% { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.6) rotate(0); }
+    18% { opacity: 0.72; }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-74px) scale(1.8) rotate(22deg); }
+  }
+  @keyframes burst {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.76) rotate(0); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(var(--spin)); }
+  }
+
+  /* ════════════════════════════════════════════════════════
+     SECTION 7 — SHARE & REPLAY STYLING (PREMIUM)
+  ════════════════════════════════════════════════════════ */
+  .share-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 50px rgba(200, 120, 120, 0.12);
+    width: min(90%, 420px);
+    margin: auto 0;
+  }
+
+  .share-title {
+    font-family: var(--fd);
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    font-weight: 700;
+    color: var(--mauve-dark);
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--mauve-dark), var(--mauve), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .share-sub {
+    font-family: var(--fb);
+    font-style: italic;
     color: var(--ink-soft);
-    animation: hintBlink 2.2s infinite;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    max-width: 320px;
+  }
+
+  .share-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .sbtn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: var(--fu);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sbtn.primary {
+    background: linear-gradient(135deg, var(--blush), var(--mauve));
+    color: white;
+    box-shadow: 0 6px 20px rgba(201, 123, 132, 0.35);
+  }
+
+  .sbtn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(201, 123, 132, 0.5);
+    background: linear-gradient(135deg, var(--blush-light), var(--mauve-dark));
+  }
+
+  .sbtn.secondary {
+    background: transparent;
+    color: var(--mauve-dark);
+    border: 2px solid var(--blush);
+  }
+
+  .sbtn.secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(232, 160, 160, 0.15);
+    border-color: var(--mauve);
+  }
+
+  .sbtn:active {
+    transform: translateY(1px);
+  }
+
+  .share-feedback {
+    font-family: var(--fu);
+    font-weight: 500;
+    color: var(--sage-dark);
+    margin-top: 8px;
+    min-height: 20px;
+    font-size: 0.82rem;
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+
+  .share-hearts {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    letter-spacing: 8px;
+    animation: swayFloral 5s ease-in-out infinite;
+    user-select: none;
   }
 
   /* QR Code Container */
   .qr-container {
-    margin-top: 30px;
+    margin-top: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
+    border-top: 1px dashed rgba(201, 123, 132, 0.25);
+    padding-top: 24px;
   }
+
   .qr-label {
     font-family: var(--fu);
-    font-size: 0.72rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--ink-soft);
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
+
   .qr-code-box {
-    background: #FFFBF4;
-    padding: 8px;
-    border-radius: 12px;
-    border: 1px solid rgba(232,160,160,0.22);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-    width: 146px;
-    height: 146px;
+    background: white;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(232, 160, 160, 0.25);
+    box-shadow: 0 10px 30px rgba(200, 120, 120, 0.1);
+    width: 150px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  .qr-code-box:hover {
+    transform: scale(1.04);
+    box-shadow: 0 14px 35px rgba(200, 120, 120, 0.15);
+  }
+
   .qr-code-box img {
     width: 130px;
     height: 130px;
     display: block;
-    border-radius: 6px;
+    border-radius: 8px;
   }
+
   .qr-fallback {
     display: none;
     max-width: 280px;
     font-family: var(--fu);
-    font-size: 0.72rem;
-    color: var(--ink-soft);
+    font-size: 0.75rem;
+    color: var(--mauve-dark);
+    background: rgba(232, 160, 160, 0.1);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px dashed rgba(232, 160, 160, 0.3);
     line-height: 1.5;
-    overflow-wrap: anywhere;
+    text-align: center;
   }
-  .qr-container.qr-failed .qr-code-box { display: none; }
-  .qr-container.qr-failed .qr-fallback { display: block; }
-  .share-title {
-    font-family: var(--fc); font-size: clamp(2rem,7vw,2.8rem);
-    color: var(--mauve); margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--mauve), var(--blush), var(--gold));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+
+  .qr-container.qr-failed .qr-code-box {
+    display: none;
   }
-  .share-sub {
-    font-family: var(--fb); font-style: italic;
-    color: var(--ink-soft); line-height: 1.72; margin-bottom: 30px; font-size: 0.95rem;
+
+  .qr-container.qr-failed .qr-fallback {
+    display: block;
   }
-  .share-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .sbtn {
-    padding: 12px 28px; border-radius: 50px; font-family: var(--fu);
-    font-size: 0.88rem; cursor: pointer;
-    transition: transform 0.22s, box-shadow 0.22s;
-  }
-  .sbtn.primary {
-    background: linear-gradient(135deg, var(--blush), var(--mauve));
-    color: white; border: none;
-    box-shadow: 0 6px 24px rgba(201,123,132,0.4);
-  }
-  .sbtn.secondary {
-    background: white; color: var(--mauve);
-    border: 2px solid var(--blush);
-  }
-  .sbtn:hover { transform: scale(1.06); }
-  .share-feedback {
-    font-family: var(--fc); color: var(--mauve);
-    margin-top: 16px; min-height: 24px; font-size: 1rem;
-    transition: opacity 0.4s;
-  }
-  .share-hearts { font-size: 1.6rem; margin-top: 22px; letter-spacing: 8px; animation: swayFloral 4s ease-in-out infinite; }
 
   @media (max-width: 560px) {
     .section {
@@ -1597,7 +1748,8 @@
   <button type="button" class="nav-dot" data-idx="3" title="Photos" aria-label="Go to photos"></button>
   <button type="button" class="nav-dot" data-idx="4" title="Wishes" aria-label="Go to bouquet wishes"></button>
   <button type="button" class="nav-dot" data-idx="5" title="Letter" aria-label="Go to letter"></button>
-  <button type="button" class="nav-dot" data-idx="6" title="Share" aria-label="Go to final wish"></button>
+  <button type="button" class="nav-dot" data-idx="6" title="Cake" aria-label="Go to cake wish"></button>
+  <button type="button" class="nav-dot" data-idx="7" title="Share" aria-label="Go to final share page"></button>
 </nav>
 
 <div class="wish-modal-overlay" id="wish-modal" role="dialog" aria-modal="true" aria-labelledby="wish-text">
@@ -2013,61 +2165,63 @@
         </div>
       </div>
       
-      <!-- Interactive Wax Seal P.S. -->
-      <div class="letter-ps-container">
-        <div class="ps-seal-wrapper" id="ps-seal" onclick="revealPS()" role="button" tabindex="0" aria-label="Tap to open hidden note">
-          <div class="ps-wax-seal">
-            <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="35" cy="35" r="33" fill="#8B1A1A" stroke="#6B0F0F" stroke-width="2"/>
-              <circle cx="35" cy="35" r="28" fill="none" stroke="rgba(255,200,200,0.3)" stroke-width="1"/>
-              <text x="35" y="44" font-family="'Dancing Script', cursive" font-weight="bold" font-size="26" text-anchor="middle" fill="rgba(255,220,220,0.85)">P.S.</text>
-            </svg>
-          </div>
-          <p class="ps-hint">Tap to break seal 🌸</p>
-        </div>
-        
-        <div class="ps-content" id="ps-content">
-          <p class="ps-text">
-            🌸 <strong>P.S.</strong> I hope this website brings a beautiful smile to your face today. You deserve all the happiness in the world, keep shining! ✨
-          </p>
-        </div>
-      </div>
-
       <p class="final-message">July 17, 2026 · Made with love 💕</p>
-      <button class="letter-continue-btn" type="button" onclick="location.href='cake.html'">Continue to cake wish</button>
     </div>
   </section>
 
-  <!-- ══ SECTION 6 — SHARE + REPLAY ════════════════════ -->
-  <section class="section" id="section-share">
-    <div class="share-wrapper">
-      <div class="cake-invite anim-scale anim-d1">
-        <a class="cake-wish-link" href="cake.html" aria-label="Open Dipti's birthday cake wish">
-          <span class="cake-preview" aria-hidden="true"><span class="preview-candle"></span></span>
-          <span>
-            <span class="cake-link-copy">Open Dipti's cake wish</span>
-            <span class="cake-link-sub">A candle moment is waiting for her.</span>
-          </span>
-          <span class="cake-link-arrow" aria-hidden="true">&rarr;</span>
-        </a>
+  <!-- ══ SECTION 6 — PREMIUM CAKE ═══════════════════════ -->
+  <section class="section" id="section-cake">
+    <div class="cake-hero">
+      <div class="hero-copy anim-up anim-d1">
+        <p class="eyebrow">July 17, 2026</p>
+        <h2 class="card-headline" id="cakeTitle" style="font-size: clamp(2.2rem, 7vw, 3rem);">Happy Birthday, Dipti</h2>
+        <p style="font-family: var(--fb); font-style: italic; color: var(--ink-soft); margin-top: 8px;">
+          May this year bring softness, strength, laughter, and every little dream your heart has been saving.
+        </p>
       </div>
 
-      <!-- Cake moved to a dedicated mobile-safe page. -->
-      <div class="share-cake-container anim-scale anim-d1" hidden>
-        <div class="cake" onclick="blowCandles()" role="button" tabindex="0" aria-label="Blow out the birthday candles">
-          <div class="plate"></div>
-          <div class="layer layer-bottom"></div>
-          <div class="layer layer-middle"></div>
-          <div class="layer layer-top"></div>
-          <div class="frosting"></div>
-          <div class="candles-container">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-          </div>
+      <button class="cake-button anim-scale anim-d2" type="button" id="cakeButton" aria-label="Blow out Dipti's birthday candles">
+        <span class="cake-build" aria-hidden="true">
+          <span class="plate"></span>
+          <span class="tier tier-bottom"></span>
+          <span class="tier tier-middle"></span>
+          <span class="tier tier-top"></span>
+          <span class="icing bottom"><span class="drip one"></span><span class="drip two"></span><span class="drip three"></span></span>
+          <span class="icing middle"><span class="drip one"></span><span class="drip two"></span><span class="drip three"></span></span>
+          <span class="icing top"><span class="drip one"></span><span class="drip two"></span><span class="drip three"></span></span>
+          <span class="sprinkle s1"></span>
+          <span class="sprinkle s2"></span>
+          <span class="sprinkle s3"></span>
+          <span class="sprinkle s4"></span>
+          <span class="sprinkle s5"></span>
+          <span class="candles">
+            <span class="candle"><span class="flame"></span><span class="smoke"></span></span>
+            <span class="candle"><span class="flame"></span><span class="smoke"></span></span>
+            <span class="candle"><span class="flame"></span><span class="smoke"></span></span>
+          </span>
+        </span>
+      </button>
+
+      <div class="wish-panel anim-up anim-d3">
+        <p class="wish-status" id="wishStatus" aria-live="polite">Close your eyes. Make one birthday wish.</p>
+        <div class="action-row">
+          <button class="action-btn primary" type="button" id="blowBtn">Blow candles</button>
+          <button class="action-btn" type="button" id="relightBtn" hidden>Relight</button>
         </div>
-        <p class="cake-hint" id="cake-hint">Tap candles to blow out & make a wish! 🕯️</p>
+        <p class="feedback" id="cakeFeedback" aria-live="polite"></p>
       </div>
+    </div>
+    <div class="scroll-hint">
+      <span>share</span>
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M3 9l5 5 5-5" stroke="#7A5C4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 7 — SHARE + REPLAY ════════════════════ -->
+  <section class="section" id="section-share">
+    <div class="share-wrapper">
       
       <h2 class="share-title anim-up anim-d2">Happy Birthday, Dipti!</h2>
       <p class="share-sub anim-up anim-d3">
@@ -2278,6 +2432,7 @@ const BG = [
   [253,232,216], // polaroid
   [253,232,240], // bouquet
   [253,224,200], // letter
+  [255,248,238], // cake
   [253,232,232], // share
 ];
 SC.addEventListener('scroll', () => {
@@ -2311,6 +2466,7 @@ function initAll() {
   initModalSwiper();
   initHeartBurst();
   initQRCode();
+  initCake();
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -2898,23 +3054,7 @@ function initLetterObs() {
   paras.forEach(p => paraObs.observe(p));
 }
 
-function revealPS() {
-  const seal = document.getElementById('ps-seal');
-  if (seal.classList.contains('broken')) return;
-  seal.classList.add('broken');
-  haptic([12, 30, 12]);
-  SFX.playPop();
-  
-  setTimeout(() => {
-    document.getElementById('ps-content').classList.add('active');
-  }, 300);
-}
-document.getElementById('ps-seal').addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    revealPS();
-  }
-});
+
 
 /* ═══════════════════════════════════════════════════════
    KEYBOARD NAVIGATION
@@ -2957,17 +3097,35 @@ async function sharePage() {
       showFeedback('Shared with love 🌸');
     } else {
       await navigator.clipboard.writeText(location.href);
-      showFeedback('Link copied! 🌸');
+      if (location.href.startsWith('file:')) {
+        showFeedback('Local file path copied! Publish online to share 🌸');
+      } else {
+        showFeedback('Link copied! 🌸');
+      }
     }
   } catch(err) {
     try {
       await navigator.clipboard.writeText(location.href);
-      showFeedback('Link copied! 🌸');
+      if (location.href.startsWith('file:')) {
+        showFeedback('Local file path copied! Publish online to share 🌸');
+      } else {
+        showFeedback('Link copied! 🌸');
+      }
     } catch(copyErr) {
-      showFeedback('Copy this link from the QR area below 🌸');
+      if (location.href.startsWith('file:')) {
+        showFeedback('Local preview 🌸');
+      } else {
+        showFeedback('Copy this link from the QR area below 🌸');
+      }
       document.querySelector('.qr-container')?.classList.add('qr-failed');
       const fallback = document.getElementById('qr-fallback');
-      if (fallback) fallback.textContent = location.href;
+      if (fallback) {
+        if (location.href.startsWith('file:')) {
+          fallback.innerHTML = `Running locally 💻<br><span style="font-size:0.65rem;opacity:0.7">Upload to a web server to scan and open on your phone.</span>`;
+        } else {
+          fallback.textContent = location.href;
+        }
+      }
     }
   }
 }
@@ -2976,30 +3134,90 @@ function replayPage() {
   SC.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-let candlesBlown = false;
-function blowCandles() {
-  if (candlesBlown) return;
-  candlesBlown = true;
-  haptic([20, 50, 20]);
+let cakeBlown = false;
+function blowCakeCandles() {
+  if (cakeBlown) return;
+  cakeBlown = true;
   
-  const flames = document.querySelectorAll('.flame');
-  flames.forEach(f => f.classList.add('extinguished'));
+  const cakeBtn = document.getElementById('cakeButton');
+  const wishStatus = document.getElementById('wishStatus');
+  const blowBtn = document.getElementById('blowBtn');
+  const relightBtn = document.getElementById('relightBtn');
   
-  SFX.playPop();
+  cakeBtn.classList.add('wish-made');
+  cakeBtn.setAttribute('aria-label', 'Dipti birthday candles are blown out');
+  wishStatus.textContent = 'Wish made. Happy Birthday, Dipti. 🎂';
+  blowBtn.textContent = 'Wish made';
+  blowBtn.disabled = true;
+  relightBtn.hidden = false;
+  
+  haptic([18, 40, 18]);
+  SFX.playChime();
   triggerBirthdayConfetti();
-  
-  const hint = document.getElementById('cake-hint');
-  hint.textContent = "🌸 Wish made! Happy Birthday, Dipti! 🎂🌸";
-  hint.style.animation = 'none';
-  hint.style.color = 'var(--mauve-dark)';
-  document.querySelector('.cake')?.setAttribute('aria-label', 'Birthday candles blown out');
+  cakeLocalBurst();
 }
-document.querySelector('.cake')?.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    blowCandles();
+
+function relightCakeCandles() {
+  cakeBlown = false;
+  const cakeBtn = document.getElementById('cakeButton');
+  const wishStatus = document.getElementById('wishStatus');
+  const blowBtn = document.getElementById('blowBtn');
+  const relightBtn = document.getElementById('relightBtn');
+  
+  cakeBtn.classList.remove('wish-made');
+  cakeBtn.setAttribute('aria-label', "Blow out Dipti's birthday candles");
+  wishStatus.textContent = 'Close your eyes. Make one birthday wish.';
+  blowBtn.textContent = 'Blow candles';
+  blowBtn.disabled = false;
+  relightBtn.hidden = true;
+  haptic([10]);
+  showCakeFeedback('Candles are glowing again. 🕯️');
+}
+
+function showCakeFeedback(text) {
+  const fb = document.getElementById('cakeFeedback');
+  if (fb) {
+    fb.textContent = text;
+    clearTimeout(showCakeFeedback.timer);
+    showCakeFeedback.timer = setTimeout(() => { fb.textContent = ''; }, 3200);
   }
-});
+}
+
+function cakeLocalBurst() {
+  const glyphs = ['✦', '✧', '♡', '❋', '✿'];
+  const count = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 10 : 34;
+  const centerX = window.innerWidth / 2;
+  const cakeBtn = document.getElementById('cakeButton');
+  if (!cakeBtn) return;
+  const centerY = Math.min(window.innerHeight * 0.5, cakeBtn.getBoundingClientRect().top + cakeBtn.offsetHeight * 0.45);
+
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement('span');
+    const angle = (Math.PI * 2 * i) / count;
+    const distance = 90 + Math.random() * 150;
+    piece.className = 'burst-piece';
+    piece.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    piece.style.setProperty('--x', centerX + 'px');
+    piece.style.setProperty('--y', centerY + 'px');
+    piece.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+    piece.style.setProperty('--dy', Math.sin(angle) * distance - 60 + 'px');
+    piece.style.setProperty('--spin', (Math.random() * 420 - 210) + 'deg');
+    piece.style.setProperty('--size', (14 + Math.random() * 14) + 'px');
+    piece.style.color = ['#ce6f7b', '#557d71', '#d8ad48', '#9d4d58'][i % 4];
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 1300);
+  }
+}
+
+function initCake() {
+  const cakeBtn = document.getElementById('cakeButton');
+  const blowBtn = document.getElementById('blowBtn');
+  const relightBtn = document.getElementById('relightBtn');
+  
+  if (cakeBtn) cakeBtn.addEventListener('click', blowCakeCandles);
+  if (blowBtn) blowBtn.addEventListener('click', blowCakeCandles);
+  if (relightBtn) relightBtn.addEventListener('click', relightCakeCandles);
+}
 
 function initQRCode() {
   const qrImg = document.getElementById('qr-code-img');
@@ -3007,7 +3225,13 @@ function initQRCode() {
   const qrContainer = document.querySelector('.qr-container');
   if (qrImg) {
     const shareUrl = window.location.href;
-    if (fallback) fallback.textContent = shareUrl;
+    if (fallback) {
+      if (shareUrl.startsWith('file:')) {
+        fallback.innerHTML = `Local Preview 💻<br><span style="font-size:0.65rem;opacity:0.75">To scan & open on your phone, upload this folder to GitHub Pages or a web server.</span>`;
+      } else {
+        fallback.textContent = shareUrl;
+      }
+    }
     qrImg.onload = () => qrContainer?.classList.remove('qr-failed');
     qrImg.onerror = () => qrContainer?.classList.add('qr-failed');
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=3d2b1f&bgcolor=fffbf4&data=${encodeURIComponent(shareUrl)}`;
