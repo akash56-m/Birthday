@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="description" content="A heartfelt birthday gift for Dipti from Pradyum — July 17, 2026."/>
   <title>Happy Birthday Dipti 🎂</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -1143,6 +1143,130 @@
     width: 100%;
     margin: auto 0;
   }
+  .cake-invite {
+    margin: 0 auto 20px;
+    width: min(100%, 340px);
+  }
+  .cake-wish-link {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    min-height: 82px;
+    padding: 14px 16px;
+    color: var(--ink);
+    text-decoration: none;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,246,236,0.84)),
+      repeating-linear-gradient(135deg, rgba(232,160,160,0.14) 0 8px, transparent 8px 18px);
+    border: 1px solid rgba(201,123,132,0.22);
+    border-radius: 18px;
+    box-shadow: 0 12px 34px rgba(168,90,101,0.14);
+    overflow: hidden;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .cake-wish-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.72), transparent);
+    transform: translateX(-115%);
+    animation: cakeInviteShine 4.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .cake-wish-link:hover,
+  .cake-wish-link:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(168,90,101,0.2);
+  }
+  .cake-preview {
+    position: relative;
+    width: 56px;
+    height: 48px;
+    filter: drop-shadow(0 10px 12px rgba(168,90,101,0.14));
+  }
+  .cake-preview::before,
+  .cake-preview::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    border-radius: 9px 9px 4px 4px;
+  }
+  .cake-preview::before {
+    bottom: 6px;
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(180deg, #fff4d6 0 38%, var(--blush) 39% 100%);
+    box-shadow: 0 8px 0 var(--mauve);
+  }
+  .cake-preview::after {
+    bottom: 34px;
+    left: 14px;
+    width: 28px;
+    height: 8px;
+    background: white;
+  }
+  .preview-candle {
+    position: absolute;
+    bottom: 40px;
+    left: 25px;
+    width: 5px;
+    height: 17px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .preview-candle::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 8px;
+    height: 10px;
+    border-radius: 50% 50% 42% 42%;
+    background: #ffa84d;
+    box-shadow: 0 0 14px rgba(255,168,77,0.8);
+    transform: translateX(-50%);
+    animation: previewFlame 0.7s ease-in-out infinite alternate;
+  }
+  .cake-link-copy,
+  .cake-link-sub {
+    display: block;
+    text-align: left;
+  }
+  .cake-link-copy {
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--mauve-dark);
+  }
+  .cake-link-sub {
+    margin-top: 3px;
+    font-family: var(--fb);
+    font-style: italic;
+    font-size: 0.82rem;
+    line-height: 1.42;
+    color: var(--ink-soft);
+  }
+  .cake-link-arrow {
+    font-family: var(--fu);
+    font-size: 1.3rem;
+    color: var(--gold);
+    transform: translateX(0);
+    transition: transform 0.22s ease;
+  }
+  .cake-wish-link:hover .cake-link-arrow,
+  .cake-wish-link:focus-visible .cake-link-arrow {
+    transform: translateX(3px);
+  }
+  @keyframes cakeInviteShine {
+    0%, 52%, 100% { transform: translateX(-115%); }
+    68% { transform: translateX(115%); }
+  }
+  @keyframes previewFlame {
+    from { transform: translateX(-50%) rotate(-4deg) scale(0.92); }
+    to { transform: translateX(-50%) rotate(4deg) scale(1.06); }
+  }
 
   /* Animated CSS Birthday Cake */
   .share-cake-container {
@@ -1363,6 +1487,23 @@
     }
     .share-wrapper {
       max-width: 330px;
+    }
+    .cake-invite {
+      width: min(100%, 310px);
+      margin-bottom: 14px;
+    }
+    .cake-wish-link {
+      grid-template-columns: auto 1fr;
+      min-height: 76px;
+      padding: 12px 14px;
+      border-radius: 16px;
+    }
+    .cake-link-arrow {
+      display: none;
+    }
+    .cake-preview {
+      width: 50px;
+      height: 44px;
     }
     #section-share {
       padding-top: max(24px, env(safe-area-inset-top));
@@ -1893,15 +2034,26 @@
       </div>
 
       <p class="final-message">July 17, 2026 · Made with love 💕</p>
-      <button class="letter-continue-btn" type="button" onclick="scrollToSection(6)">Continue to final wish</button>
+      <button class="letter-continue-btn" type="button" onclick="location.href='cake.html'">Continue to cake wish</button>
     </div>
   </section>
 
   <!-- ══ SECTION 6 — SHARE + REPLAY ════════════════════ -->
   <section class="section" id="section-share">
     <div class="share-wrapper">
-      <!-- Animated CSS Birthday Cake -->
-      <div class="share-cake-container anim-scale anim-d1">
+      <div class="cake-invite anim-scale anim-d1">
+        <a class="cake-wish-link" href="cake.html" aria-label="Open Dipti's birthday cake wish">
+          <span class="cake-preview" aria-hidden="true"><span class="preview-candle"></span></span>
+          <span>
+            <span class="cake-link-copy">Open Dipti's cake wish</span>
+            <span class="cake-link-sub">A candle moment is waiting for her.</span>
+          </span>
+          <span class="cake-link-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Cake moved to a dedicated mobile-safe page. -->
+      <div class="share-cake-container anim-scale anim-d1" hidden>
         <div class="cake" onclick="blowCandles()" role="button" tabindex="0" aria-label="Blow out the birthday candles">
           <div class="plate"></div>
           <div class="layer layer-bottom"></div>
