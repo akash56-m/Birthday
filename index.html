@@ -1132,8 +1132,17 @@
   ════════════════════════════════════════════════════════ */
   #section-share {
     background: radial-gradient(ellipse at 50% 40%, #fde0e0 0%, #fdf6ec 70%);
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding-top: max(34px, env(safe-area-inset-top));
+    padding-bottom: max(34px, env(safe-area-inset-bottom));
   }
-  .share-wrapper { text-align: center; max-width: 370px; }
+  .share-wrapper {
+    text-align: center;
+    max-width: 370px;
+    width: 100%;
+    margin: auto 0;
+  }
 
   /* Animated CSS Birthday Cake */
   .share-cake-container {
@@ -1355,14 +1364,59 @@
     .share-wrapper {
       max-width: 330px;
     }
+    #section-share {
+      padding-top: max(24px, env(safe-area-inset-top));
+      padding-bottom: max(26px, env(safe-area-inset-bottom));
+    }
+    .share-cake-container {
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+    .cake {
+      transform: scale(0.86);
+      transform-origin: center top;
+      margin: 0 auto -10px;
+    }
+    .cake-hint {
+      max-width: 270px;
+      font-size: 0.96rem;
+      line-height: 1.28;
+    }
     .share-title {
       font-size: clamp(2rem, 13vw, 2.55rem);
+      margin-bottom: 8px;
+    }
+    .share-sub {
+      margin-bottom: 20px;
+      line-height: 1.55;
     }
     .share-btns {
       gap: 10px;
     }
     .sbtn {
       padding: 11px 22px;
+    }
+    .share-feedback {
+      min-height: 18px;
+      margin-top: 10px;
+    }
+    .share-hearts {
+      margin-top: 12px;
+      font-size: 1.34rem;
+      letter-spacing: 5px;
+    }
+    .qr-container {
+      margin-top: 16px;
+      gap: 6px;
+    }
+    .qr-code-box {
+      width: 124px;
+      height: 124px;
+      padding: 7px;
+    }
+    .qr-code-box img {
+      width: 110px;
+      height: 110px;
     }
   }
 
